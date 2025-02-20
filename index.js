@@ -19,10 +19,10 @@ const fetchBooks = () => {
                   <div
                     class="d-flex justify-content-between align-items-center"
                   >
-                    
                     <button class='btn btn-primary' onclick="addToCart('${book.title}', '${book.price}', '${book.asin}')"> EUR ${book.price} </button>
-                    <button class='btn btn-secondary'> Nascondi </button>
-                  </div>
+                    <button class='btn btn-secondary' onclick='hideCard(event)'> Nascondi </button>
+                    </div>
+                    <a class='btn btn-warning w-100 my-2' href='./details.html?id=${book.asin}'> Dettagli </a>
                 </div>
               </div> </div>`
         })
@@ -31,6 +31,7 @@ const fetchBooks = () => {
     .catch((err) => console.error(err))
 }
 
+//COMPITO DELLA SETTIMANA SCORSA:
 const addToCart = (title, price, asin) => {
   const book = document.querySelector("#book_" + asin)
   book.style.border = "2px red solid"
@@ -69,8 +70,17 @@ const removeFromCart = (event, asin, price) => {
 }
 
 const emptyCart = () => {
-    document.querySelector(".list-group").innerHTML = ""
-    document.querySelectorAll(".card").forEach(card => card.style.border = "none")
-    const totale = document.querySelector("h1 span")
-    totale.innerText = "0"
+  document.querySelector(".list-group").innerHTML = ""
+  document
+    .querySelectorAll(".card")
+    .forEach((card) => (card.style.border = "none"))
+  const totale = document.querySelector("h1 span")
+  totale.innerText = "0"
+}
+
+//COMPITO DI QUESTA LEZIONE:
+
+const hideCard = (event) => {
+  // event.target.parentElement.parentElement.parentElement.parentElement.remove()
+  event.target.closest(".col").remove()
 }
